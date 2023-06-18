@@ -32,3 +32,6 @@ yarn-error.log*
 
 # vercel
 .vercel
+/.idea/$PROJECT_FILE$
+/.idea/.gitignore
+/.idea/
