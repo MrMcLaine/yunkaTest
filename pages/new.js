@@ -65,7 +65,7 @@ const NewEvent = () => {
 
     return (
         <div className="form-container">
-            <h1><New></New> Event</h1>
+            <h1>New Event</h1>
             <div>
                 {
                     isSubmitting
