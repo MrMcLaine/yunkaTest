@@ -9,9 +9,15 @@ export default async (req, res) => {
     switch (method) {
         case 'GET':
             try {
-                const notes = await Event.find({});
+                const events = await Event.find({});
 
-                res.status(200).json({ success: true, data: notes })
+                const eventsWithImageURL = events.map((event) => ({
+                    _id: event.id,
+                    title: event.title,
+                    description: event.description,
+                }));
+
+                res.status(200).json({ success: true, data: eventsWithImageURL })
             } catch (error) {
                 res.status(400).json({ success: false });
             }
