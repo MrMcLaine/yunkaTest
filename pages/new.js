@@ -43,14 +43,17 @@ const NewEvent = () => {
     };
 
     const handleImageChange = (e) => {
+        const file = e.target.files[0];
         const reader = new FileReader();
+
         reader.onload = function (e) {
             setForm({
                 ...form,
                 image: e.target.result,
             });
         };
-        reader.readAsDataURL(e.target.files[0]);
+
+        reader.readAsDataURL(file);
     };
 
     const validate = () => {

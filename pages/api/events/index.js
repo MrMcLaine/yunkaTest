@@ -1,4 +1,5 @@
 import connectDB from '../../../lib/mongo';
+import cloudinary from '../../../lib/cloudinary/index';
 import Event from '../../../models/Event';
 
 connectDB();
@@ -24,7 +25,15 @@ export default async (req, res) => {
             break;
         case 'POST':
             try {
-                const event = await Event.create(req.body);
+                const result = await cloudinary.uploader.upload(req.body.image, {
+                    folder: 'D://test'
+                });
+
+                const event = await Event.create({
+                    title: req.body.title,
+                    description: req.body.description,
+                    imageUrl: result.secure_url
+                });
 
                 res.status(201).json({ success: true, data: event })
             } catch (error) {

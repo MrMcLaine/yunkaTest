@@ -12,8 +12,8 @@ const NoteSchema = new mongoose.Schema({
         required: true,
         maxlength: [200, 'Description cannot be more than 200 characters']
     },
-    image: {
-        type: Buffer,
+    imageUrl: {
+        type: String,
         required: true
     }
 })
