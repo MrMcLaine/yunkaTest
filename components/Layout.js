@@ -1,14 +1,15 @@
 import Head from 'next/head';
 import Navbar from './Navbar';
+import AdminNavbar from './AdminNavbar';
 
-const Layout = ({ children }) => (
+const Layout = ({children, isAdminPage}) => (
     <>
         <Head>
             <title>Yunka</title>
         </Head>
-        <Navbar />
+        {isAdminPage ? <AdminNavbar/> : <Navbar/>}
         {children}
     </>
-)
+);
 
 export default Layout;
