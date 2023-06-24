@@ -8,11 +8,11 @@ const AdminNavbar = () => (
             <Menu.Item as="a">Admin Home</Menu.Item>
         </Link>
 
-        <Link href="#">
+        <Link href="/admin/events">
             <Menu.Item as="a">Events</Menu.Item>
         </Link>
 
-        <Link href="#">
+        <Link href="/admin/blogs">
             <Menu.Item as="a">Blog</Menu.Item>
         </Link>
     </Menu>
