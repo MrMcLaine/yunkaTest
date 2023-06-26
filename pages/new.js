@@ -43,17 +43,15 @@ const NewEvent = () => {
     };
 
     const handleImageChange = (e) => {
-        const file = e.target.files[0];
         const reader = new FileReader();
-
         reader.onload = function (e) {
+            console.log(e.target.result); // Check the value of e.target.result
             setForm({
                 ...form,
                 image: e.target.result,
             });
         };
-
-        reader.readAsDataURL(file);
+        reader.readAsDataURL(e.target.files[0]);
     };
 
     const validate = () => {
@@ -78,7 +76,6 @@ const NewEvent = () => {
                 ) : (
                     <Form onSubmit={handleSubmit}>
                         <Form.Input
-                            fluid
                             error={errors.title ? { content: 'Please enter a title', pointing: 'below' } : null}
                             label="Title"
                             placeholder="Title"
@@ -86,7 +83,6 @@ const NewEvent = () => {
                             onChange={handleChange}
                         />
                         <Form.TextArea
-                            fluid
                             label="Description"
                             placeholder="Description"
                             name="description"

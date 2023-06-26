@@ -26,14 +26,18 @@ export default async (req, res) => {
             break;
         case 'POST':
             try {
+                const {title, description, image} = req.body;
+
+                // Upload image to Cloudinary
                 const result = await cloudinary.uploader.upload(image, {
                     folder: 'event-images', // Customize the folder name
                 });
 
+                // Create a new event with the image URL
                 const event = await Event.create({
-                    title: req.body.title,
-                    description: req.body.description,
-                    imageUrl: result.secure_url
+                    title,
+                    description,
+                    imageUrl: result.secure_url, // Save the Cloudinary image URL
                 });
 
                 res.status(201).json({ success: true, data: event })
