@@ -1,5 +1,5 @@
 import connectDB from '../../../lib/mongo';
-import cloudinary from '../../../lib/cloudinary/index';
+import uploadImage from '../../../services/imageService';
 import Event from '../../../models/Event';
 
 connectDB();
@@ -29,9 +29,7 @@ export default async (req, res) => {
                 const {title, description, image} = req.body;
 
                 // Upload image to Cloudinary
-                const result = await cloudinary.uploader.upload(image, {
-                    folder: 'event-images', // Customize the folder name
-                });
+                const result = await uploadImage(image);
 
                 // Create a new event with the image URL
                 const event = await Event.create({
