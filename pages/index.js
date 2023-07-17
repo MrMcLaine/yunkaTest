@@ -17,9 +17,9 @@ function Home() {
                         Events
                     </Button>
                 </Link>
-                <Link href="/blogs">
+                <Link href="/blog">
                     <Button color="pink" type="button">
-                        Blogs
+                        Blog
                     </Button>
                 </Link>
                 <Link href="/join">
