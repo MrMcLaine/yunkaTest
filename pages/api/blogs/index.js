@@ -1,6 +1,6 @@
 import connectDB from '../../../lib/mongo';
 import uploadImage from '../../../services/imageService';
-import Event from '../../../models/Event';
+import Blog from '../../../models/Blog';
 
 connectDB();
 
@@ -10,16 +10,16 @@ export default async (req, res) => {
     switch (method) {
         case 'GET':
             try {
-                const events = await Event.find({});
+                const blogs = await Blog.find({});
 
-                const eventsWithImageURL = events.map((event) => ({
-                    _id: event.id,
-                    title: event.title,
-                    description: event.description,
-                    imageUrl: event.imageUrl,
+                const blogsWithImageURL = blogs.map((blog) => ({
+                    _id: blog.id,
+                    title: blog.title,
+                    description: blog.description,
+                    imageUrl: blog.imageUrl,
                 }));
 
-                res.status(200).json({success: true, data: eventsWithImageURL})
+                res.status(200).json({success: true, data: blogsWithImageURL})
             } catch (error) {
                 res.status(400).json({success: false});
             }
@@ -32,13 +32,13 @@ export default async (req, res) => {
                 const result = await uploadImage(image);
 
                 // Create a new event with the image URL
-                const event = await Event.create({
+                const blog = await Blog.create({
                     title,
                     description,
                     imageUrl: result.secure_url, // Save the Cloudinary image URL
                 });
 
-                res.status(201).json({success: true, data: event})
+                res.status(201).json({success: true, data: blog})
             } catch (error) {
                 res.status(400).json({success: false});
             }

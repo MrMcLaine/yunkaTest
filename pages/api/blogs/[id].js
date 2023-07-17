@@ -1,5 +1,5 @@
 import connectDB from '../../../lib/mongo';
-import Event from '../../../models/Event';
+import Blog from '../../../models/Blog';
 
 connectDB();
 
@@ -12,38 +12,38 @@ export default async (req, res) => {
     switch (method) {
         case 'GET':
             try {
-                const event = await Event.findById(id);
+                const blog = await Blog.findById(id);
 
-                if (!event) {
+                if (!blog) {
                     return res.status(400).json({success: false});
                 }
 
-                res.status(200).json({success: true, data: event});
+                res.status(200).json({success: true, data: blog});
             } catch (error) {
                 res.status(400).json({success: false});
             }
             break;
         case 'PUT':
             try {
-                const event = await Event.findByIdAndUpdate(id, req.body, {
+                const blog = await Blog.findByIdAndUpdate(id, req.body, {
                     new: true,
                     runValidators: true
                 });
 
-                if (!event) {
+                if (!blog) {
                     return res.status(400).json({success: false});
                 }
 
-                res.status(200).json({success: true, data: event});
+                res.status(200).json({success: true, data: blog});
             } catch (error) {
                 res.status(400).json({success: false});
             }
             break;
         case 'DELETE':
             try {
-                const deletedEvent = await Event.deleteOne({_id: id});
+                const deletedBlog = await Blog.deleteOne({_id: id});
 
-                if (!deletedEvent) {
+                if (!deletedBlog) {
                     return res.status(400).json({success: false})
                 }
 
