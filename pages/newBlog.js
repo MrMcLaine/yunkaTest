@@ -1,13 +1,13 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
 import { Button, Form, Loader } from 'semantic-ui-react';
 import { useRouter } from 'next/router';
 
 const NewBlog = () => {
-    const [form, setForm] = useState({ title: '', description: '', image: '' });
+    const [form, setForm] = useState({ title: '', description: '', image: null });
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [errors, setErrors] = useState({});
     const router = useRouter();
+    console.log('Start NewBlog');
 
     useEffect(() => {
         if (isSubmitting) {
@@ -21,7 +21,22 @@ const NewBlog = () => {
 
     const createBlog = async () => {
         try {
-            await axios.post('/api/blogs', form);
+            console.log('Start createBlog');
+            const formData = new FormData();
+            console.log('Title from form', form.title);
+            formData.append('title', form.title);
+            console.log('Description from form', form.description);
+            formData.append('description', form.description);
+            console.log('Image from form', form.image);
+            formData.append('image', form.image);
+            console.log('FormData', formData);
+            
+            await fetch("/api/blogs", {
+                method: "POST",
+                body: formData,
+            });
+
+            console.log('return to /')
             router.push('/');
         } catch (error) {
             console.log(error);
@@ -43,15 +58,10 @@ const NewBlog = () => {
     };
 
     const handleImageChange = (e) => {
-        const reader = new FileReader();
-        reader.onload = function (e) {
-            console.log(e.target.result); // Check the value of e.target.result
-            setForm({
-                ...form,
-                image: e.target.result,
-            });
-        };
-        reader.readAsDataURL(e.target.files[0]);
+        setForm({
+            ...form,
+            image: e.target.files[0],
+        });
     };
 
     const validate = () => {

@@ -4,10 +4,8 @@ import Blog from '../../../models/Blog';
 connectDB();
 
 export default async (req, res) => {
-    const {
-        query: {id},
-        method
-    } = req;
+    const { id } = req.query;
+    const { method } = req;
 
     switch (method) {
         case 'GET':
