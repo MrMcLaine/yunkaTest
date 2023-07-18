@@ -30,7 +30,7 @@ const NewBlog = () => {
             console.log('Image from form', form.image);
             formData.append('image', form.image);
             console.log('FormData', formData);
-            
+
             await fetch("/api/blogs", {
                 method: "POST",
                 body: formData,

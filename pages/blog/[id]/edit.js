@@ -2,8 +2,11 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Button, Form, Loader } from 'semantic-ui-react';
 import { useRouter } from 'next/router';
+import fetch from "isomorphic-unfetch";
 
 const EditBlog = ({ blog }) => {
+    console.log('Start EditBlog');
+    console.log('EditBlog', blog);
     const [form, setForm] = useState({ title: blog.title, description: blog.description, image: null });
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [errors, setErrors] = useState({});
@@ -110,5 +113,12 @@ const EditBlog = ({ blog }) => {
         </div>
     );
 };
+
+EditBlog.getInitialProps = async ({ query: { id } }) => {
+    const res = await fetch(`http://localhost:3000/api/blogs/${id}`);
+    const { data } = await res.json();
+
+    return { blog: data }
+}
 
 export default EditBlog;
