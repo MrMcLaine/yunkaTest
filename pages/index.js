@@ -27,6 +27,11 @@ function Home() {
                         Join us
                     </Button>
                 </Link>
+                <Link href="/telegram-bot">
+                    <Button color="google plus" type="button">
+                        Telegram_bot
+                    </Button>
+                </Link>
             </div>
         </>
     );
