@@ -1,4 +1,4 @@
-import { generateInviteLink } from '../../services/telegramBotService';
+import {botMessage, generateInviteLink} from '../../services/telegramBotService';
 
 export default async function handler(req, res) {
     if (req.method === 'POST') {
@@ -6,6 +6,7 @@ export default async function handler(req, res) {
             const { username } = req.body;
             console.log('username:', username);
             const inviteLink = generateInviteLink(username);
+            await botMessage()
 
             res.status(200).json({ inviteLink });
         } catch (error) {
