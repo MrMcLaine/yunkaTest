@@ -2,6 +2,7 @@ const TelegramBot = require('node-telegram-bot-api');
 const axios = require("axios");
 
 const botUsername = process.env.BOT_USERNAME;
+const MAX_CAPTION_LENGTH = 1024;
 
 function generateInviteLink(telegramUsername) {
     return `https://t.me/${botUsername}?start=${telegramUsername}`;
@@ -62,7 +63,8 @@ async function botMessage() {
 
                     // Send the blogs to the user
                     for (const blog of blogs) {
-                        const caption = `${blog.title}: ${blog.description}`;
+                        const caption = `${blog.title}: ${blog.description}`.slice(0, MAX_CAPTION_LENGTH);
+                        console.log('Caption:', caption);
                         await bot.sendPhoto(chatId, blog.imageUrl, {caption});
                     }
                 } catch (error) {
