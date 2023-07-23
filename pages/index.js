@@ -33,6 +33,15 @@ function Home() {
                     </Button>
                 </Link>
             </div>
+
+            <div>
+                <h1>Admin page</h1>
+                <Link href="/admin/super">
+                    <Button color="orange" type="button">
+                        Main Admin Page
+                    </Button>
+                </Link>
+            </div>
         </>
     );
 }

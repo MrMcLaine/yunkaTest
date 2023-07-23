@@ -11,6 +11,18 @@ const adminSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    canProcessYunka: {
+        type: Boolean,
+        default: false,
+    },
+    canChangeAutoLetter: {
+        type: Boolean,
+        default: false,
+    },
+    canRemoveContent: {
+        type: Boolean,
+        default: false,
+    },
     role: {
         type: String,
         enum: ['admin', 'superAdmin'],
